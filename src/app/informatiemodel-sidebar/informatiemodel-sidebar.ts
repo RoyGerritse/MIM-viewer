@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {RouterLink, RouterModule} from '@angular/router';
-import {MIM} from '../mim.interface';
+import {MIM} from '../../models/mim.interface';
 
 @Component({
   selector: 'app-informatiemodel-sidebar',

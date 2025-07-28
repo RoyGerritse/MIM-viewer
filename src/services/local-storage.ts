@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {apiUrls} from './apiUrls';
 import {map} from 'rxjs';
-import {MIM} from './mim.interface';
+import {MIM} from '../models/mim.interface';
 import {HttpClient} from '@angular/common/http';
 import {XMLParser} from 'fast-xml-parser';
 import {isPlatformBrowser} from '@angular/common';
@@ -14,8 +14,8 @@ export class LocalStorageService {
   private http = inject(HttpClient);
   private parser =  new XMLParser({
     ignoreAttributes: false,
-    attributeNamePrefix: "",       // don't prefix attributes with @
-    textNodeName: "value"          // name of the field for inner text
+    attributeNamePrefix: "",
+    textNodeName: "value"
   });
   private readonly platformId = inject(PLATFORM_ID);
 

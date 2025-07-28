@@ -1,8 +1,8 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {InformatiemodelSidebar} from '../informatiemodel-sidebar/informatiemodel-sidebar';
 import {ActivatedRoute} from '@angular/router';
-import {LocalStorageService} from '../local-storage';
-import {MIM} from '../mim.interface';
+import {LocalStorageService} from '../../services/local-storage';
+import {MIM} from '../../models/mim.interface';
 
 @Component({
   selector: 'app-page-view-domein',

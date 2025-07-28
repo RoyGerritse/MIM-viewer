@@ -1,7 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {RouterLink, RouterOutlet} from '@angular/router';
-import {LocalStorageService} from './local-storage';
-import {MIM} from './mim.interface';
+import {LocalStorageService} from '../services/local-storage';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +11,7 @@ import {MIM} from './mim.interface';
 export class App implements OnInit {
   private service = inject(LocalStorageService);
 
-  ngOnInit() {
+  public ngOnInit() {
     this.service.setInformatiemodels();
   }
 }

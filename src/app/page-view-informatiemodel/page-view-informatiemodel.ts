@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {MIM} from '../mim.interface';
+import {MIM} from '../../models/mim.interface';
 import {ActivatedRoute} from '@angular/router';
-import {LocalStorageService} from '../local-storage';
+import {LocalStorageService} from '../../services/local-storage';
 import {InformatiemodelSidebar} from '../informatiemodel-sidebar/informatiemodel-sidebar';
 
 @Component({

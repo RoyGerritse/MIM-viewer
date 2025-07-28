@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {MIM} from '../mim.interface';
+import {MIM} from '../../models/mim.interface';
 import {RouterLink} from '@angular/router';
-import {LocalStorageService} from '../local-storage';
+import {LocalStorageService} from '../../services/local-storage';
 
 @Component({
   selector: 'app-page-home',
