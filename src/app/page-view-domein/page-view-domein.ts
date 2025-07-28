@@ -1,22 +1,23 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {MIM} from '../mim.interface';
+import {InformatiemodelSidebar} from '../informatiemodel-sidebar/informatiemodel-sidebar';
 import {ActivatedRoute} from '@angular/router';
 import {LocalStorageService} from '../local-storage';
-import {InformatiemodelSidebar} from '../informatiemodel-sidebar/informatiemodel-sidebar';
+import {MIM} from '../mim.interface';
 
 @Component({
-  selector: 'app-page-view-informatiemodel',
+  selector: 'app-page-view-domein',
   imports: [
     InformatiemodelSidebar
   ],
-  templateUrl: './page-view-informatiemodel.html',
-  styleUrl: './page-view-informatiemodel.scss'
+  templateUrl: './page-view-domein.html',
+  styleUrl: './page-view-domein.scss'
 })
-export class PageViewInformatiemodel implements OnInit {
+export class PageViewDomein implements OnInit {
   private route = inject(ActivatedRoute);
   private service = inject(LocalStorageService);
   public documents: MIM[] = [];
-  public page: string = "";
+  public page: string = '';
+  public domein: string = '';
 
   ngOnInit() {
     this.documents = this.service.getModels();
@@ -24,6 +25,9 @@ export class PageViewInformatiemodel implements OnInit {
       const page = params.get('page');
       if (!page) return;
       this.page = page;
+      const domein = params.get('domein');
+      if (!domein) return;
+      this.domein = domein;
     });
   }
 

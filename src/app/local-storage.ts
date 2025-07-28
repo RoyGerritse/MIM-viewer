@@ -4,8 +4,8 @@ import {map} from 'rxjs';
 import {MIM} from './mim.interface';
 import {HttpClient} from '@angular/common/http';
 import {XMLParser} from 'fast-xml-parser';
-import { isPlatformBrowser } from '@angular/common';
-import { PLATFORM_ID, Inject } from '@angular/core';
+import {isPlatformBrowser} from '@angular/common';
+import {PLATFORM_ID} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -27,10 +27,15 @@ export class LocalStorageService {
       this.http.get(url.url, {responseType: 'text'}).pipe(
         map(xmlString => this.parser.parse(xmlString))
       ).subscribe(a => {
-        console.log(a)
+        const packages = a["mim:Informatiemodel"]?.["mim:packages"];
+        const ensureArray = <T>(input: T | T[] | undefined): T[] =>
+          input === undefined ? [] : Array.isArray(input) ? input : [input];
+        a["mim:Informatiemodel"]["mim:packages"]["mim:Domein"] = ensureArray(packages?.["mim:Domein"]);
+        a["mim:Informatiemodel"]["mim:packages"]["mim:View"] = ensureArray(packages?.["mim:View"]);
+        a["mim:Informatiemodel"]["mim:packages"]["mim:Extern"] = ensureArray(packages?.["mim:Extern"]);
         let mim: MIM = JSON.parse(JSON.stringify(a));
-        console.log(mim);
         mim.name = url.naam;
+        console.log(mim);
         this.setItem(url.naam, mim);
       });
     }

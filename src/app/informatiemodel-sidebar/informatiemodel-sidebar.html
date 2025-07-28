@@ -1,0 +1,58 @@
+<nav id="sidebarMenu" class="d-md-block bg-light sidebar collapse">
+  <div class="position-sticky pt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item mb-2">
+        <h6 class="text-uppercase px-3">Main</h6>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" [routerLink]="['/', mim.name]">Dashboard</a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item mt-4 mb-2">
+        <h6 class="text-uppercase px-3">Package</h6>
+        <ul class="nav flex-column">
+
+          <li class="nav-item">
+            <span class="nav-link disabled" style="cursor: default;">Domein</span>
+            <ul class="nav flex-column ">
+              @for (domein of mim["mim:Informatiemodel"]["mim:packages"]["mim:Domein"]; track domein) {
+                <li class="nav-item">
+                  <a class="nav-link small"
+                     [routerLink]="['/', mim.name, 'domein', domein.id]">{{ domein["mim:naam"] }}</a>
+                </li>
+              }
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <span class="nav-link disabled" style="cursor: default;">Extern</span>
+            <ul class="nav flex-column ">
+              @for (extern of mim["mim:Informatiemodel"]["mim:packages"]["mim:Extern"]; track extern) {
+                <li class="nav-item">
+                  <a class="nav-link small"
+                     [routerLink]="['/', mim.name, 'extern',extern.id]">{{ extern["mim:naam"] }}</a>
+                </li>
+              }
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <span class="nav-link disabled" style="cursor: default;">View</span>
+            <ul class="nav flex-column ">
+              @for (view of mim["mim:Informatiemodel"]["mim:packages"]["mim:View"]; track view) {
+                <li class="nav-item">
+                  <a class="nav-link small"
+                     [routerLink]="['/', mim.name, 'view',view.id]">{{ view["mim:naam"] }}</a>
+
+                </li>
+              }
+            </ul>
+          </li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>

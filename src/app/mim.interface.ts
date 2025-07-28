@@ -36,7 +36,7 @@ export interface MimInformatiemodel {
 
 export interface MimPackages {
   "mim:Domein": MimDomein[]
-  "mim:View": MimView
+  "mim:View": MimView[]
   "mim:Extern": MimExtern[]
 }
 
