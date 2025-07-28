@@ -12,7 +12,7 @@ import {PLATFORM_ID} from '@angular/core';
 })
 export class LocalStorageService {
   private http = inject(HttpClient);
-  private parser =  new XMLParser({
+  private parser = new XMLParser({
     ignoreAttributes: false,
     attributeNamePrefix: "",
     textNodeName: "value"
@@ -23,16 +23,22 @@ export class LocalStorageService {
   }
 
   setInformatiemodels() {
+    const arrayKeys = [
+      "mim:Domein",
+      "mim:View",
+      "mim:Extern",
+      "mim:Attribuutsoort",
+      "mim:Gegevensgroeptype",
+      "mim:Datatype",
+      "mim:Objecttype",
+      "mim:Relatiesoort"
+    ];
+
     for (const url of apiUrls) {
       this.http.get(url.url, {responseType: 'text'}).pipe(
         map(xmlString => this.parser.parse(xmlString))
       ).subscribe(a => {
-        const packages = a["mim:Informatiemodel"]?.["mim:packages"];
-        const ensureArray = <T>(input: T | T[] | undefined): T[] =>
-          input === undefined ? [] : Array.isArray(input) ? input : [input];
-        a["mim:Informatiemodel"]["mim:packages"]["mim:Domein"] = ensureArray(packages?.["mim:Domein"]);
-        a["mim:Informatiemodel"]["mim:packages"]["mim:View"] = ensureArray(packages?.["mim:View"]);
-        a["mim:Informatiemodel"]["mim:packages"]["mim:Extern"] = ensureArray(packages?.["mim:Extern"]);
+        this.enforceArrays(a, arrayKeys);
         let mim: MIM = JSON.parse(JSON.stringify(a));
         mim.name = url.naam;
         console.log(mim);
@@ -40,6 +46,28 @@ export class LocalStorageService {
       });
     }
   }
+
+  ensureArray = <T>(input: T | T[] | undefined): T[] =>
+    input === undefined ? [] : Array.isArray(input) ? input : [input];
+
+  enforceArrays = (obj: any, arrayKeys: string[]) => {
+    if (typeof obj !== 'object' || obj === null) return;
+
+    for (const key of Object.keys(obj)) {
+      if (arrayKeys.includes(key)) {
+        obj[key] = this.ensureArray(obj[key]);
+      }
+
+      // Recurse into the property if it's an object or array
+      if (typeof obj[key] === 'object') {
+        if (Array.isArray(obj[key])) {
+          obj[key].forEach((item: any) => this.enforceArrays(item, arrayKeys));
+        } else {
+          this.enforceArrays(obj[key], arrayKeys);
+        }
+      }
+    }
+  };
 
   getModels(): MIM[] {
     const array = new Array<MIM>();

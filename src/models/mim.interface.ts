@@ -351,7 +351,7 @@ export interface MimObjecttypen {
 export interface MimObjecttype {
   "mim:naam": string
   "mim:herkomst": string
-  "mim:definitie": any
+  "mim:definitie": MimDefinitieBody
   "mim:herkomstDefinitie": string
   "mim:datumOpname": any
   "mim:indicatieAbstractObject": boolean
@@ -370,7 +370,7 @@ export interface MimObjecttype {
 }
 
 export interface MimAttribuutsoorten {
-  "mim:Attribuutsoort": any
+  "mim:Attribuutsoort": MimAttribuutsoort[]
 }
 
 export interface MimExtKenmerken10 {
@@ -404,7 +404,7 @@ export interface MimGegevensgroepen {
 export interface MimGegevensgroep {
   "mim:naam": string
   "mim:herkomst": string
-  "mim:definitie": MimDefinitie8
+  "mim:definitie": MimDefinitieBody
   "mim:herkomstDefinitie": string
   "mim:datumOpname": string
   "mim:indicatieMaterieleHistorie": boolean
@@ -416,11 +416,11 @@ export interface MimGegevensgroep {
   index: string
 }
 
-export interface MimDefinitie8 {
-  "xhtml:body": XhtmlBody8
+export interface MimDefinitieBody {
+  "xhtml:body": XhtmlBodyP
 }
 
-export interface XhtmlBody8 {
+export interface XhtmlBodyP {
   "xhtml:p": string
 }
 
@@ -625,7 +625,7 @@ export interface MimView {
   "mim:herkomstDefinitie": string
   "mim:datumOpname": string
   "mim:locatie": string
-  "mim:objecttypen": MimObjecttypen2
+  "mim:objecttypen": MimObjecttypen
   "mim-ext:kenmerken": MimExtKenmerken19
   index: string
   id: string
@@ -644,93 +644,6 @@ export interface XhtmlP {
   value: string
 }
 
-export interface MimObjecttypen2 {
-  "mim:Objecttype": MimObjecttype2
-}
-
-export interface MimObjecttype2 {
-  "mim:naam": string
-  "mim:herkomst": string
-  "mim:definitie": MimDefinitie12
-  "mim:herkomstDefinitie": string
-  "mim:datumOpname": string
-  "mim:indicatieAbstractObject": boolean
-  "mim:attribuutsoorten": MimAttribuutsoorten3
-  "mim-ext:kenmerken": MimExtKenmerken18
-  index: string
-  id: string
-}
-
-export interface MimDefinitie12 {
-  "xhtml:body": XhtmlBody13
-}
-
-export interface XhtmlBody13 {
-  "xhtml:p": string
-}
-
-export interface MimAttribuutsoorten3 {
-  "mim:Attribuutsoort": MimAttribuutsoort2[]
-}
-
-export interface MimAttribuutsoort2 {
-  "mim:naam": string
-  "mim:herkomst": string
-  "mim:definitie": MimDefinitie13
-  "mim:herkomstDefinitie": string
-  "mim:datumOpname": string
-  "mim:type": MimType4
-  "mim:indicatieMaterieleHistorie": boolean
-  "mim:indicatieFormeleHistorie": boolean
-  "mim:kardinaliteit": any
-  "mim:authentiek": string
-  "mim:indicatieAfleidbaar": boolean
-  "mim:indicatieClassificerend": boolean
-  "mim:mogelijkGeenWaarde": boolean
-  "mim:identificerend": boolean
-  "mim-ext:kenmerken": MimExtKenmerken17
-  index: string
-}
-
-export interface MimDefinitie13 {
-  "xhtml:body": XhtmlBody14
-}
-
-export interface XhtmlBody14 {
-  "xhtml:p": XhtmlP2
-}
-
-export interface XhtmlP2 {
-  "xhtml:strong": string
-  value: string
-}
-
-export interface MimType4 {
-  "mim:Datatype": MimDatatype5
-}
-
-export interface MimDatatype5 {
-  value: string
-  index: string
-}
-
-export interface MimExtKenmerken17 {
-  "mim-ext:Kenmerk": MimExtKenmerk17[]
-}
-
-export interface MimExtKenmerk17 {
-  value: any
-  naam: string
-}
-
-export interface MimExtKenmerken18 {
-  "mim-ext:Kenmerk": MimExtKenmerk18[]
-}
-
-export interface MimExtKenmerk18 {
-  value: any
-  naam: string
-}
 
 export interface MimExtKenmerken19 {
   "mim-ext:Kenmerk": MimExtKenmerk19[]
