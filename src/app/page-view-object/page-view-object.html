@@ -12,15 +12,32 @@
         </div>
 
         @if (getObject() && getObject()!["mim:attribuutsoorten"]) {
+          <!-- Main Object Info -->
+          <div class="mb-4">
+            <p><strong>Herkomst:</strong> {{ getObject()!["mim:herkomst"] }}</p>
+            <p><strong>Definitie:</strong> {{ getObject()!["mim:definitie"]["xhtml:body"]["xhtml:p"] }}</p>
+            <p><strong>Datum opname:</strong> {{ getObject()!["mim:datumOpname"] }}</p>
+            <p><strong>Abstract object:</strong> {{ getObject()!["mim:indicatieAbstractObject"] ? 'Ja' : 'Nee' }}</p>
+          </div>
+
+          <!-- Optional: Object-level kenmerken -->
+          <div class="mb-4">
+            <h5>Kenmerken</h5>
+            <ul>
+              @for (kenmerk of getObject()!["mim-ext:kenmerken"]["mim-ext:Kenmerk"]; track kenmerk) {
+                <li><strong>{{ kenmerk.naam }}:</strong> {{ kenmerk.value }}</li>
+              }
+            </ul>
+          </div>
 
           <div class="table-responsive">
             <h4>Attributen</h4>
-            <table class="table table-striped table-sm">
-              <thead>
+            <table class="table table-striped table-sm align-middle text-nowrap">
+              <thead class="table-light">
               <tr>
-                <th scope="col">Datum opname</th>
                 <th scope="col">Naam</th>
                 <th scope="col">Type</th>
+                <th scope="col">Datum opname</th>
                 <th scope="col">Herkomst</th>
                 <th scope="col">Herkomst definitie</th>
                 <th scope="col">Identificerend</th>
@@ -35,18 +52,18 @@
               <tbody class="table-group-divider">
                 @for (entry of getObject()!["mim:attribuutsoorten"]!["mim:Attribuutsoort"]; track entry) {
                   <tr>
-                    <td>{{ entry["mim:datumOpname"] }}</td>
                     <td>{{ entry["mim:naam"] }}</td>
                     <td>{{ entry["mim:type"]["mim:Datatype"]?.value }}</td>
+                    <td>{{ entry["mim:datumOpname"] }}</td>
                     <td>{{ entry["mim:herkomst"] }}</td>
                     <td>{{ entry["mim:herkomstDefinitie"] }}</td>
-                    <td>{{ entry["mim:identificerend"] }}</td>
-                    <td>{{ entry["mim:indicatieAfleidbaar"] }}</td>
-                    <td>{{ entry["mim:indicatieClassificerend"] }}</td>
-                    <td>{{ entry["mim:indicatieFormeleHistorie"] }}</td>
-                    <td>{{ entry["mim:indicatieMaterieleHistorie"] }}</td>
+                    <td>{{ entry["mim:identificerend"] ? "✅" : "❌" }}</td>
+                    <td>{{ entry["mim:indicatieAfleidbaar"] ? "✅" : "❌" }}</td>
+                    <td>{{ entry["mim:indicatieClassificerend"] ? "✅" : "❌" }}</td>
+                    <td>{{ entry["mim:indicatieFormeleHistorie"] ? "✅" : "❌" }}</td>
+                    <td>{{ entry["mim:indicatieMaterieleHistorie"] ? "✅" : "❌" }}</td>
                     <td>{{ entry["mim:kardinaliteit"] }}</td>
-                    <td>{{ entry["mim:mogelijkGeenWaarde"] }}</td>
+                    <td>{{ entry["mim:mogelijkGeenWaarde"] ? "✅" : "❌" }}</td>
                   </tr>
                 }
               </tbody>

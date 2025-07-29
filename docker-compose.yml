@@ -1,0 +1,7 @@
+version: '3'
+services:
+  web:
+    build: .
+    image: roygerritse/mim.roygerritse.nl
+    ports:
+      - "5000:80"

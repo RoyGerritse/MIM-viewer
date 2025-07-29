@@ -1,11 +1,13 @@
-FROM node:20 as build-stage
+FROM node:24-alpine AS builder
 WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
 COPY . .
-RUN npm install && npm run build
+RUN npm run build
+RUN ["ls", "-l"]
 
 FROM nginx:alpine
-COPY --from=build-stage /app/dist/mim-viewer /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY ./runtime-config.template.js /usr/share/nginx/html/assets/runtime-config.js
-
-CMD ["/bin/sh", "-c", "envsubst < /usr/share/nginx/html/assets/runtime-config.js > /usr/share/nginx/html/assets/runtime-config.js && exec nginx -g 'daemon off;'"]
+RUN rm -rf /usr/share/nginx/html/*
+COPY --from=builder /app/dist/mim-viewer-angular/browser /usr/share/nginx/html/
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

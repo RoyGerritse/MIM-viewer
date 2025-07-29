@@ -71,6 +71,14 @@
           },
           "defaultConfiguration": "development"
         },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/mim-viewer-angular/server",
+            "main": "src/main.server.ts",
+            "tsConfig": "tsconfig.server.json"
+          }
+        },
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n"
         },
